@@ -12,9 +12,9 @@ const Head = () => {
         <img className="h-8 mx-2" alt="ytlogo" src={YTLogo}/>
       </div>
       <div className="col-span-10 px-10">
-        <input className="w-1/2 border border-gray-400 p-2 rounded-l-full" type="text" />
-        <button className="border border-gray-400 p-2 rounded-r-full bg-gray-100">
-          <img className="h-5" alt="search" src={Search}/>
+        <input className="w-1/2 border border-gray-400 pt-1.5 pb-1.5 rounded-l-full" type="text" />
+        <button className="border border-gray-400 pt-1 pb-3 pl-6 rounded-r-full bg-gray-200">
+          <img className="h-5 pr-5 pt-1.5" alt="search" src={Search}/>
         </button>
       </div>
       <div  className="col-span-1">
