@@ -15,12 +15,15 @@ const VideoContainer = () => {
     const json = await data.json();
     setVideos(json.items);
   }
-
+  
   return (
     <div>
-      <VideoCard info={videos[0]} />
+      {
+      /* { <VideoCard info={videos[0]} /> } */
+      videos.length > 0 && <VideoCard info={videos[0]} />
+      }
     </div>
   )
-}
+};
 
-export default VideoContainer
+export default VideoContainer;
