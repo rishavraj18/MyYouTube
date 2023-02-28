@@ -16,10 +16,10 @@ const VideoCard = ({ info }) => {
     var countViews = calViews.toString();
 
   return (
-    <div className="p-2 m-1 w-72 shadow-lg">
+    <div className="p-2 m-1 w-52 shadow-lg">
         <img className="rounded-xl" alt="card" src={thumbnails.medium.url} />
         <ul>
-            <li className="font-bold text-sm">{title}</li>
+            <li className="font-bold  text-sm">{title}</li>
             <li className="pt-2 text-sm">{channelTitle}</li>
             <li className="pt-2 text-sm">{countViews}</li>
         </ul>
