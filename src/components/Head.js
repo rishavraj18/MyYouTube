@@ -9,6 +9,7 @@ import { YOUTUBE_SEARCH_API } from '../utils/constants';
 
 const Head = () => {
   const [searchQuery, setsearchQuery] = useState("");
+  const [suggestions, setSuggestions] = useState([])
 
   useEffect(() => {   
     const getSearchSuggestions = async () => {
@@ -16,6 +17,7 @@ const Head = () => {
       const data = await fetch(YOUTUBE_SEARCH_API + searchQuery);
       const json = await data.json();
       //console.log(json[1]);
+      setSuggestions(json[1]);
     };
     /**
      *  Make an API call after every keypress but if the difference between 2 API calls is <200ms 
@@ -71,19 +73,15 @@ const Head = () => {
           <img className="h-5 pr-5 pt-1.5" alt="search" src={Search}/>
         </button>
        </div>
-       <div className="fixed bg-white pt-2 px-2 w-[27.5rem] h-96 rounded-xl shadow-lg border border-gray-100">
-        <div class="flex items-center hover:bg-gray-100">
-         <img className="h-4 pr-2 pt-1" alt="search" src={Search}/>
-        <div className="py-1"><span>Iphone</span></div>
-        </div>
-        <div class="flex items-center hover:bg-gray-100">
-         <img className="h-4 pr-2 pt-1" alt="search" src={Search}/>
-        <div className="py-1"><span>Iphone</span></div>
-        </div>
-        <div class="flex items-center hover:bg-gray-100">
-         <img className="h-4 pr-2 pt-1" alt="search" src={Search}/>
-        <div className="py-1"><span>Iphone</span></div>
-        </div>
+       
+       <div className="fixed bg-white pt-2 px-2 w-[27.5rem] h-84 rounded-xl shadow-lg border border-gray-100">
+        {suggestions.map(s => 
+           <div key={s} class="flex items-center hover:bg-gray-100">
+           <img className="h-4 pr-2 pt-1" alt="search" src={Search}/>
+          <div className="py-1"><span>{s}</span></div>
+          </div>
+        )}
+        <div className="text-right mt-3 mb-2 text-gray-400 text-sm">Report search predictions</div>
        </div>
       </div>
       <div  className="col-span-1">
