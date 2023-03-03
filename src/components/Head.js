@@ -60,8 +60,9 @@ const Head = () => {
         </a>
       </div>
       <div className="col-span-10 px-10">
+       <div>
         <input 
-        className = "w-1/2 border border-gray-400 pt-1.5 pb-1.5 pl-2 rounded-l-full" 
+        className = "w-1/2 border border-gray-400 pt-1.5 pb-1.5 pl-3 rounded-l-full" 
         type = "text" 
         value = {searchQuery}
         onChange = {(e) => setsearchQuery(e.target.value)}
@@ -69,6 +70,21 @@ const Head = () => {
         <button className="border border-gray-400 pt-1 pb-3 pl-6 rounded-r-full bg-gray-200">
           <img className="h-5 pr-5 pt-1.5" alt="search" src={Search}/>
         </button>
+       </div>
+       <div className="fixed bg-white pt-2 px-2 w-[27.5rem] h-96 rounded-xl shadow-lg border border-gray-100">
+        <div class="flex items-center hover:bg-gray-100">
+         <img className="h-4 pr-2 pt-1" alt="search" src={Search}/>
+        <div className="py-1"><span>Iphone</span></div>
+        </div>
+        <div class="flex items-center hover:bg-gray-100">
+         <img className="h-4 pr-2 pt-1" alt="search" src={Search}/>
+        <div className="py-1"><span>Iphone</span></div>
+        </div>
+        <div class="flex items-center hover:bg-gray-100">
+         <img className="h-4 pr-2 pt-1" alt="search" src={Search}/>
+        <div className="py-1"><span>Iphone</span></div>
+        </div>
+       </div>
       </div>
       <div  className="col-span-1">
         <img className="h-8" alt="user" src={User}/>
