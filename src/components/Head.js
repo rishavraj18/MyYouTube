@@ -9,7 +9,8 @@ import { YOUTUBE_SEARCH_API } from '../utils/constants';
 
 const Head = () => {
   const [searchQuery, setsearchQuery] = useState("");
-  const [suggestions, setSuggestions] = useState([])
+  const [suggestions, setSuggestions] = useState([]);
+  const [showSuggestions, setShowSuggestions] = useState(false);
 
   useEffect(() => {   
     const getSearchSuggestions = async () => {
@@ -66,15 +67,19 @@ const Head = () => {
         <input 
         className = "w-1/2 border border-gray-400 pt-1.5 pb-1.5 pl-3 rounded-l-full" 
         type = "text" 
+        placeholder="Search"
         value = {searchQuery}
         onChange = {(e) => setsearchQuery(e.target.value)}
+        onFocus = {() => setShowSuggestions(true)}
+        onBlur = {() => setShowSuggestions(false)}
         />
         <button className="border border-gray-400 pt-1 pb-3 pl-6 rounded-r-full bg-gray-200">
           <img className="h-5 pr-5 pt-1.5" alt="search" src={Search}/>
         </button>
        </div>
        
-       <div className="fixed bg-white pt-2 px-2 w-[27.5rem] h-84 rounded-xl shadow-lg border border-gray-100">
+       {showSuggestions && searchQuery  && (
+        <div className="fixed bg-white pt-2 px-2 w-[27.5rem] h-84 rounded-xl shadow-lg border border-gray-100">
         {suggestions.map(s => 
            <div key={s} class="flex items-center hover:bg-gray-100">
            <img className="h-4 pr-2 pt-1" alt="search" src={Search}/>
@@ -83,6 +88,8 @@ const Head = () => {
         )}
         <div className="text-right mt-3 mb-2 text-gray-400 text-sm">Report search predictions</div>
        </div>
+       )}
+       
       </div>
       <div  className="col-span-1">
         <img className="h-8" alt="user" src={User}/>
