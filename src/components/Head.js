@@ -72,6 +72,8 @@ const Head = () => {
         onChange = {(e) => setsearchQuery(e.target.value)}
         onFocus = {() => setShowSuggestions(true)}
         onBlur = {() => setShowSuggestions(false)}
+        onMouseEnter={() => setShowSuggestions(true)}
+        onMouseLeave={() => setShowSuggestions(false)}
         />
         <button className="border border-gray-400 pt-1 pb-3 pl-6 rounded-r-full bg-gray-200">
           <img className="h-5 pr-5 pt-1.5" alt="search" src={Search}/>
@@ -79,7 +81,7 @@ const Head = () => {
        </div>
        
        {showSuggestions && searchQuery  && (
-        <div className="fixed bg-white pt-2 px-2 w-[27.5rem] h-84 rounded-xl shadow-lg border border-gray-100">
+        <div className="fixed bg-white pt-2 px-2 w-[27.5rem] h-84 rounded-xl shadow-lg border border-gray-100" onMouseEnter={() => setShowSuggestions(true)} onMouseLeave={() => setShowSuggestions(false)}>
         {suggestions.map(s => 
            <div key={s} class="flex items-center hover:bg-gray-100">
            <img className="h-4 pr-2 pt-1" alt="search" src={Search}/>
