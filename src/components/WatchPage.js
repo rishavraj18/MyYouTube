@@ -9,9 +9,11 @@ const WatchPage = () => {
   //console.log(searchParams.get("v"));
 
   const dispatch = useDispatch();
+
   useEffect(()=> {
     dispatch(closeMenu());
   }, []);
+  
   return (
   <div>
     <div className="px-5 pt-5">
