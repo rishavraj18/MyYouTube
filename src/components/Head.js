@@ -1,51 +1,47 @@
 import React, { useEffect, useState } from 'react'
 import Menu from '../images/menu.png';
 import YTLogo from '../images/YTLogo.png'
-import User from '../images/user.jpg'
+import User from '../images/mypic.jpg'
 import Search from '../images/search.png';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { toggleMenu } from '../utils/appSlice';
 import { YOUTUBE_SEARCH_API } from '../utils/constants';
+import { cacheResults } from '../utils/searchSlice';
 
 const Head = () => {
   const [searchQuery, setsearchQuery] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
 
+  const searchCache = useSelector((store) => store.search);
+  const dispatch = useDispatch();
+
   useEffect(() => {   
     const getSearchSuggestions = async () => {
       const data = await fetch(YOUTUBE_SEARCH_API + searchQuery);
       const json = await data.json();
       setSuggestions(json[1]);
+
+      //update cache
+      dispatch(cacheResults({
+        [searchQuery] : json[1],
+      }));
     };
-    /**
-     *  Make an API call after every keypress but if the difference between 2 API calls is <200ms 
-     *  else decline the API call
-     * 
-     * key - i
-     * - render the component
-     * - useEffect();
-     * - start timer => make api call after 200ms
-     * 
-     * key - ip
-     * - destroy the component(useEffect return method)
-     * - re-render the component
-     * - useEffect();
-     * - start timer => make api call after 200ms
-     * 
-     */
+    
      // API call
-    const timer = setTimeout(() => getSearchSuggestions(), 300);
+    const timer = setTimeout(() => {
+    if(searchCache[searchQuery]){
+      setSuggestions(searchCache[searchQuery]);
+     } else {
+      getSearchSuggestions()
+     }
+    } , 300);
 
     return () => {
       clearTimeout(timer);
     };
   }, [searchQuery]);
   
-  
-
-  const dispatch = useDispatch();
-
   const toggleMenuHandler = () => {
     dispatch(toggleMenu());
   };
@@ -92,7 +88,7 @@ const Head = () => {
        
       </div>
       <div  className="col-span-1">
-        <img className="h-8" alt="user" src={User}/>
+        <img className="h-8 rounded-2xl" alt="user" src={User}/>
       </div>
     </div>
   )
